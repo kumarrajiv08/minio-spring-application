@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio-spring-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: minio-spring-app
+  template:
+    metadata:
+      labels:
+        app: minio-spring-app
+    spec:
+      containers:
+        - name: minio-spring-app-container
+          image: docker.io/rajiv08/minio-spring:2.0 #it will be getting images from dockerhub
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080 #port in which container is running on the cluster
